@@ -4,7 +4,7 @@
 set -ex
 ABSOLUTE_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 GIT_REV="$(git rev-parse --short=7 HEAD)"
-IMAGE="${IMAGE:-quay.io/app-sre/product-devfile-index}"
+IMAGE="${IMAGE:-quay.io/app-sre/redhat-devfile-index}"
 IMAGE_TAG="${IMAGE_TAG:-${GIT_REV}}"
 
 # Run the build script
