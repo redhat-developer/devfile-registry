@@ -2,6 +2,10 @@ schemaVersion: 2.0.0
 metadata:
   name: java-jboss-eap-xp-bootable-jar
   version: 1.0.0
+  displayName: JBoss EAP XP
+  tags: ["Java", "JBoss"]
+  projectType: "jboss"
+  language: "java"
   website: https://access.redhat.com/products/red-hat-jboss-enterprise-application-platform/
 starterProjects:
   - name: microprofile-config
