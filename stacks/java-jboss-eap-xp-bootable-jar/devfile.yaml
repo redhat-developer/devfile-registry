@@ -2,9 +2,10 @@ schemaVersion: 2.0.0
 metadata:
   name: java-jboss-eap-xp-bootable-jar
   version: 1.0.0
-  displayName: JBoss EAP XP
-  tags: ["Java", "JBoss"]
-  projectType: "jboss"
+  displayName: JBoss EAP XP 2.0 Bootable Jar
+  description: Java stack with EAP XP 2.0 in bootable Jar mode, OpenJDK 11 and Maven 3.5
+  tags: ["RHEL8", "Java", "OpenJDK", "Maven", "EAP", "Microprofile", "EAP XP Bootable"]
+  projectType: "JBoss EAP XP"
   language: "java"
   website: https://access.redhat.com/products/red-hat-jboss-enterprise-application-platform/
 starterProjects:
