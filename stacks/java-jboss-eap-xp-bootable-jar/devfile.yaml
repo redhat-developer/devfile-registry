@@ -5,6 +5,7 @@ metadata:
   displayName: JBoss EAP XP 2.0 Bootable Jar
   description: Java stack with EAP XP 2.0 in bootable Jar mode, OpenJDK 11 and Maven 3.5
   tags: ["RHEL8", "Java", "OpenJDK", "Maven", "EAP", "Microprofile", "EAP XP Bootable"]
+  icon: https://raw.githubusercontent.com/redhat-developer/devfile-registry/main/icons/type-jboss.svg
   projectType: "JBoss EAP XP"
   language: "java"
   website: https://access.redhat.com/products/red-hat-jboss-enterprise-application-platform/
