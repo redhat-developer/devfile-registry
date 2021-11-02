@@ -49,7 +49,7 @@ test() {
 
     $ODO_PATH project create "$devfileName" || error=true
     if $error; then
-        echo "ERROR project create failed"
+        echo "ERROR odo project create failed"
         FAILED_TESTS="$FAILED_TESTS $devfileName"
         return 1
     fi
@@ -63,7 +63,7 @@ test() {
     fi
 
     if $error; then
-        echo "ERROR create failed"
+        echo "ERROR odo create failed"
         $ODO_PATH project delete -f "$devfileName"
         FAILED_TESTS="$FAILED_TESTS $devfileName"
         return 1
@@ -80,7 +80,7 @@ test() {
             $ODO_PATH url create --host "$(minikube ip).nip.io" || error=true
         fi
         if $error; then
-            echo "ERROR url create failed"
+            echo "ERROR odo url create failed"
             $ODO_PATH project delete -f "$devfileName"
             FAILED_TESTS="$FAILED_TESTS $devfileName"
             return 1
@@ -89,7 +89,7 @@ test() {
 
     $ODO_PATH push || error=true
     if $error; then
-        echo "ERROR push failed"
+        echo "ERROR odo push failed"
         $ODO_PATH delete -f -a || error=true
         $ODO_PATH project delete -f "$devfileName"
         FAILED_TESTS="$FAILED_TESTS $devfileName"
@@ -159,7 +159,7 @@ else
 fi
 
 
-# remember if there was an error so the script can exist with proper exit code at the end
+# remember if there was an error so the script can exit with proper exit code at the end
 error=false
 
 # print out which tests failed
