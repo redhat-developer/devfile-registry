@@ -31,6 +31,7 @@ From there, push the container image to a container registry of your choice and 
 
 For contributing Devfile stacks to this registry, please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
+For testing devfile stacks in the registry, or devfile stacks that you are contributing, please see the [testing doc](tests/README.md).
 
 ## Reporting any issue
 
