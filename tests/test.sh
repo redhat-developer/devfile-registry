@@ -158,13 +158,8 @@ else
   done
 fi
 
-
-# remember if there was an error so the script can exit with proper exit code at the end
-error=false
-
 # print out which tests failed
 if [ "$FAILED_TESTS" != "" ]; then
-    error=true
     echo "FAILURE: FAILED TESTS: $FAILED_TESTS"
     exit 1
 fi
