@@ -33,6 +33,7 @@ objects:
         labels:
           app: devfile-registry
       spec:
+        serviceAccountName: devfile-registry-service-account
         volumes:
           - name: devfile-registry-storage
             emptyDir: {}
@@ -185,7 +186,12 @@ objects:
           "alias": "${REGISTRY_HOST_ALIAS}"
         }
       }
-
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    labels:
+      app: devfile-registry
+    name: devfile-registry-service-account
 parameters:
 - name: DEVFILE_INDEX_IMAGE
   value: quay.io/app-sre/product-devfile-index
