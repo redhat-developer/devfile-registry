@@ -1,13 +1,19 @@
 #
-# Copyright (c) 2021-2022 Red Hat, Inc.
-# This program and the accompanying materials are made
-# available under the terms of the Eclipse Public License 2.0
-# which is available at https://www.eclipse.org/legal/epl-2.0/
+#   Copyright 2021-2023 Red Hat, Inc.
 #
-# SPDX-License-Identifier: EPL-2.0
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
 #
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
 ---
-apiVersion: v1
+apiVersion: template.openshift.io/v1
 kind: Template
 metadata:
   name: devfile-registry
@@ -48,7 +54,7 @@ objects:
               name: devfile-registry
               items:
                 - key: .env.registry-viewer
-                  path: .env.local
+                  path: .env.production
         containers:
         - image: ${DEVFILE_INDEX_IMAGE}:${IMAGE_TAG}
           imagePullPolicy: "${DEVFILE_INDEX_PULL_POLICY}"
@@ -78,6 +84,14 @@ objects:
             initialDelaySeconds: 15
             periodSeconds: 10
             timeoutSeconds: 3
+          startupProbe:
+            httpGet:
+              path: /viewer
+              port: 3000
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 10
           resources:
             requests:
               cpu: 100m
@@ -104,30 +118,6 @@ objects:
               drop: ["ALL"]
             seccompProfile:
               type: "RuntimeDefault"
-          livenessProbe:
-            httpGet:
-              path: /viewer
-              port: 3000
-              scheme: HTTP
-            initialDelaySeconds: 15
-            periodSeconds: 10
-            timeoutSeconds: 3
-          readinessProbe:
-            httpGet:
-              path: /viewer
-              port: 3000
-              scheme: HTTP
-            initialDelaySeconds: 15
-            periodSeconds: 10
-            timeoutSeconds: 3
-          startupProbe:
-            httpGet:
-              path: /viewer
-              port: 3000
-              scheme: HTTP
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            timeoutSeconds: 10
           resources:
             requests:
               cpu: 100m
@@ -135,10 +125,16 @@ objects:
             limits:
               cpu: 250m
               memory: ${REGISTRY_VIEWER_MEMORY_LIMIT}
+          env:
+            - name: NEXT_PUBLIC_ANALYTICS_WRITE_KEY 
+              value: ${ANALYTICS_WRITE_KEY}
+            - name: DEVFILE_REGISTRIES 
+              value: |- 
+                [{"name":"Community","url":"http://localhost:8080","fqdn":"${REGISTRY_HOST_ALIAS}"}]
           volumeMounts:
             - name: viewer-env-file
-              mountPath: /app/apps/registry-viewer/.env.local
-              subPath: .env.local
+              mountPath: /app/.env.production
+              subPath: .env.production
               readOnly: true
         - image: ${OCI_REGISTRY_IMAGE}:${OCI_REGISTRY_IMAGE_TAG}
           imagePullPolicy: "${OCI_REGISTRY_PULL_POLICY}"
@@ -228,8 +224,9 @@ objects:
             path: /metrics
 
     .env.registry-viewer: |
-      ANALYTICS_WRITE_KEY=${ANALYTICS_WRITE_KEY}
-      DEVFILE_REGISTRIES=[{"name":"ProductRegistry","url":"http://localhost:8080","fqdn":"${REGISTRY_HOST_ALIAS}"}]
+      NEXT_PUBLIC_ANALYTICS_WRITE_KEY=${ANALYTICS_WRITE_KEY}
+      DEVFILE_REGISTRIES=[{"name":"Community","url":"http://localhost:8080","fqdn":"${REGISTRY_HOST_ALIAS}"}]
+
 - apiVersion: v1
   kind: ServiceAccount
   metadata:
@@ -294,7 +291,7 @@ parameters:
   displayName: Devfile registry hostname alias
   description: The hostname alias to pass in to the devfile registry viewer's config.
 - name: ANALYTICS_WRITE_KEY
-  value: S2rfQJo8xA9nyLhdY2CnTrWqlUgHqmwq
+  value: ""
   displayName: Public write key for segment.io
   description: The public write key to send viewer analytics to segment.io
 - name: TELEMETRY_KEY
