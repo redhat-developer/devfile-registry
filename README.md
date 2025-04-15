@@ -6,7 +6,6 @@
 
 Source repository for the Red Hat product devfile registry
 
-This product devfile registry is updated weekly, by 12pm EST Wednesdays, with any updated stacks in this repository.
 
 ## Registry Updates
 
