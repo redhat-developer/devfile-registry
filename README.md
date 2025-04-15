@@ -30,15 +30,3 @@ If you are a stack owner and need to request an urgent refresh of the registry s
 To build this devfile registry into a container image run `.ci/build.sh`. A container image will be built using the [devfile registry build tools](https://github.com/devfile/registry-support/tree/master/build-tools).
 
 From there, push the container image to a container registry of your choice and deploy using one of the methods outlined [here](https://github.com/devfile/registry-support#deploy).
-
-## Contributing
-
-For contributing Devfile stacks to this registry, please see [CONTRIBUTING.md](CONTRIBUTING.md).
-
-For testing devfile stacks in the registry, or devfile stacks that you are contributing, please see the [testing doc](tests/README.md).
-
-## Reporting any issue
-
-For issues relating to a specific devfile stack in this repository, please reach out to the devfile stack maintainer to determine where to open an issue.
-
-For issues relating to the hosted product devfile registry service in general, please use this repository for opening issues.
