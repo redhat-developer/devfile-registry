@@ -3,20 +3,6 @@
 > [!WARNING]
 > This repository has been retired and will no longer be maintained. It has been archived and will remain read-only.
 
-
-Source repository for the Red Hat product devfile registry
-
-
-## Registry Updates
-
-The staging product devfile registry is refreshed upon each commit to main in this repository. Production is promoted manually and as mentioned above, is done each Wednesday, as needed.
-
-If you are a stack owner and need to request an urgent refresh of the registry service before Wednesday (for example if a stack is broken), please open an issue in this repository outlining the following:
-
-- Stack name
-- Why the refresh is needed
-- Why the refresh cannot wait until the next regularly scheduled refresh
-
 ## Developing
 
 ### Prerequisites
@@ -26,6 +12,6 @@ If you are a stack owner and need to request an urgent refresh of the registry s
 
 ### Build
 
-To build this devfile registry into a container image run `.ci/build.sh`. A container image will be built using the [devfile registry build tools](https://github.com/devfile/registry-support/tree/master/build-tools).
+To build this devfile registry into a container image run `.ci/build.sh`. A container image will be built using the [devfile registry build tools](https://github.com/devfile/registry-support/tree/master/build-tools) up until commit [4bc237b](https://github.com/devfile/registry-support/commit/4bc237b077e1bd478ea24195fac7c35fd2975441).
 
 From there, push the container image to a container registry of your choice and deploy using one of the methods outlined [here](https://github.com/devfile/registry-support#deploy).
