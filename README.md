@@ -3,6 +3,8 @@
 > [!WARNING]
 > This repository has been retired and will no longer be maintained. It has been archived and will remain read-only.
 
+- Source repository for the Red Hat product devfile registry.
+
 ## Developing
 
 ### Prerequisites
