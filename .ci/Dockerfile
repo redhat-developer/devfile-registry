@@ -12,6 +12,8 @@ COPY . /registry
 # Download the registry build tools
 RUN git clone https://github.com/devfile/registry-support.git /registry-support
 
+RUN cd /registry-support && git checkout -f 4bc237b077e1bd478ea24195fac7c35fd2975441
+
 # Run the registry build tools
 RUN /registry-support/build-tools/build.sh /registry /build
 
